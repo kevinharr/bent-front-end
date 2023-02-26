@@ -2,6 +2,8 @@
 import * as profileService from './services/profileService'
 import { useState, useEffect } from 'react'
 import { Routes, Route, useNavigate } from 'react-router-dom'
+import BentList from './pages/BentList/BentList'
+import * as bentService from './services/bentService'
 
 
 // page components
@@ -43,6 +45,14 @@ function App(): JSX.Element {
     if (user) fetchProfiles()
   }, [user])
 
+  useEffect(() => {
+    const fetchAllBents = async () => {
+      const data = await bentService.index()
+      console.log('Bent Data:', data)
+    }
+    if (user) fetchAllBents()
+  }, [user])
+
   const handleLogout = (): void => {
     authService.logout()
     setUser(null)
@@ -76,6 +86,16 @@ function App(): JSX.Element {
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/bents"
+          
+          element={
+            <ProtectedRoute user={user}>
+              <BentList />
+            </ProtectedRoute>
+          }
+        />
+
         <Route
           path="/change-password"
           element={

@@ -25,3 +25,11 @@ export interface ChangePasswordFormData {
 export interface PhotoFormData {
   photo: File | null;
 }
+
+export interface BentData {
+  _id: number;
+  profile: { id: number };
+  workPreference: string;
+  favoriteColor: string;
+  favoriteMusic: string;
+}

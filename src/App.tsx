@@ -5,6 +5,8 @@ import { Routes, Route, useNavigate } from 'react-router-dom'
 import BentList from './pages/BentList/BentList'
 import * as bentService from './services/bentService'
 import NewBent from './pages/NewBent/NewBent'
+import { BentData } from './types/forms'
+import EditBent from './pages/EditBent/EditBent'
 
 
 // page components
@@ -67,11 +69,23 @@ function App(): JSX.Element {
     setUser(authService.getUser())
   }
 
-  const handleAddBent = async (bentData) => {
+  const handleAddBent = async (bentData: BentData) => {
     const newBent = await bentService.create(bentData)
     setBents([newBent, ...bents])
     navigate('/bents')
   }
+
+  const handleUpdateBent = async (bentData: BentData): Promise<void> => {
+    const updatedBent = await bentService.update(bentData)
+    setBents(bents.map((b) => bentData._id === b._id ? updatedBent : b))
+    navigate('/bents')
+  }
+
+  <Route path="/bents/:id/edit" element={
+    <ProtectedRoute user={user}>
+      <EditBent handleUpdateBent={handleUpdateBent} />
+    </ProtectedRoute>
+  } />
 
   return (
     <>

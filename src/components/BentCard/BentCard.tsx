@@ -1,12 +1,14 @@
-import { Link } from "react-router-dom"
 import styles from './BentCard.module.css'
+import { useParams, Link } from "react-router-dom"
+import AuthorInfo from "../AuthorInfo/AuthorInfo"
 
 // Components
 // import AuthorInfo from "../AuthorInfo/AuthorInfo"
 
 const BentCard = ({ bent }) => {
   return (
-    <Link to={`/bents/${bent._id}`}>
+    <>
+     <Link to={`/bents/${bent._id}`}>
       <article className={styles.container}>
         <header>
           <span>
@@ -18,6 +20,19 @@ const BentCard = ({ bent }) => {
         </header>
       </article>
     </Link>
+    <span>
+      <AuthorInfo content={bent} />
+
+      {bent.author._id === props.user.profile &&
+        <>
+          <Link to={`/bents/${id}/edit`} state={bent}>Edit</Link>
+          <button>Delete</button>
+        </>
+      }
+     </span>
+    
+    </>
+   
   )
 }
 

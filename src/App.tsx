@@ -24,13 +24,14 @@ import * as authService from './services/authService'
 import './App.css'
 
 // types
-import { User, Profile } from './types/models'
+import { User, Profile, Bent } from './types/models'
 
 function App(): JSX.Element {
   const navigate = useNavigate()
   
   const [user, setUser] = useState<User | null>(authService.getUser())
   const [profiles, setProfiles] = useState<Profile[]>([])
+  const [bents, setBents] = useState([])
 
   useEffect((): void => {
     const fetchProfiles = async (): Promise<void> => {
@@ -49,6 +50,8 @@ function App(): JSX.Element {
     const fetchAllBents = async () => {
       const data = await bentService.index()
       console.log('Bent Data:', data)
+      console.log("hello bent data")
+      setBents(data)
     }
     if (user) fetchAllBents()
   }, [user])
@@ -88,10 +91,9 @@ function App(): JSX.Element {
         />
         <Route
           path="/bents"
-          
           element={
             <ProtectedRoute user={user}>
-              <BentList />
+              <BentList bents={bents}/>
             </ProtectedRoute>
           }
         />

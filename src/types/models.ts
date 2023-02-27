@@ -20,3 +20,11 @@ export interface User {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface Bent {
+  id: number;
+  profile: { id: number };
+  workPreference: string;
+  favoriteColor: string;
+  favoriteMusic: string;
+}

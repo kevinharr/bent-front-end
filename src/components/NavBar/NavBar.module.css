@@ -7,8 +7,9 @@
     position: fixed; 
     padding: 14px 21px;
     align-items: center;
-    background: rgb(81, 68, 68);
-    border-bottom: 1px solid rgb(200, 200, 200);
+    text-decoration: none;
+    background: rgb(255, 255, 255);
+    /* border-bottom: 1px solid rgb(200, 200, 200); */
   }
   
   .container img {
@@ -16,11 +17,12 @@
   }
   
   ul {
-    margin: 0;
-    width: 100%;
+    margin: 20px 20px 20px 20px;
+    width: 90%;
     display: flex;
     list-style: none;
     font-weight: bold;
+    text-decoration: none;
     align-items: center;
     justify-content: flex-end;
   }
@@ -28,13 +30,24 @@
   li {
     margin-left: 35px;
     text-align: right;
+    text-decoration: none;
   }
   
-  @media only screen and (max-width: 414px) {
+  /* @media only screen and (max-width: 414px) {
     .container ul {
       padding-left: 0px;
     }
     .container li {
       font-size: 15px;
     }
+  } */
+
+  .NavLink {
+    text-decoration: none;
+    color: rgb(227, 9, 147);
+    transition: .3s;
+  }
+  
+  .NavLink:hover {
+    color: rgb(31, 31, 75);
   }

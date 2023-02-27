@@ -12,8 +12,12 @@
     /* border-bottom: 1px solid rgb(200, 200, 200); */
   }
   
-  .container img {
+  .flask img {
     width: 50px;
+  }
+
+  .flask {
+    align-items:start
   }
   
   ul {
@@ -33,14 +37,14 @@
     text-decoration: none;
   }
   
-  /* @media only screen and (max-width: 414px) {
+  @media only screen and (max-width: 414px) {
     .container ul {
       padding-left: 0px;
     }
     .container li {
       font-size: 15px;
     }
-  } */
+  }
 
   .NavLink {
     text-decoration: none;
@@ -51,3 +55,5 @@
   .NavLink:hover {
     color: rgb(31, 31, 75);
   }
+
+  

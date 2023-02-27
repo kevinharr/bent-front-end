@@ -22,7 +22,7 @@ export interface User {
 }
 
 export interface Bent {
-  id: number;
+  _id: number;
   profile: { id: number };
   workPreference: string;
   favoriteColor: string;

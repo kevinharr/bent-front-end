@@ -10,6 +10,7 @@ const BentCard = ({ bent }) => {
       <article className={styles.container}>
         <header>
           <span>
+            <h1>Testing bent card</h1>
             <h1>{bent.workPreference}</h1>
             <h1>{bent.favoriteColor}</h1>
             <h1>{bent.favoriteMusic}</h1>

@@ -20,7 +20,7 @@ const NewBent = (props) => {
   return (
     <main className={styles.container}>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="work-input">Work Preference:</label>
+        <label htmlFor="work-input">What time of day do you work best?</label>
         <select
           required
           name="work"
@@ -31,7 +31,7 @@ const NewBent = (props) => {
           <option value="Early Bird">Early Bird</option>
           <option value="Night Owl">Night Owl</option>
         </select>
-        <label htmlFor="color-input">Color Preference:</label>
+        <label htmlFor="color-input">What is your favorite color?</label>
         <select
           required
           name="color"
@@ -46,7 +46,7 @@ const NewBent = (props) => {
           <option value="Red">Red</option>
           <option value="Orange">Orange</option>
         </select>
-        <label htmlFor="music-input">Music Preference:</label>
+        <label htmlFor="music-input">What is your favorite genre of music?</label>
         <select
           required
           name="music"

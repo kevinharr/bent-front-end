@@ -26,7 +26,7 @@ const BentCard = ({ bent }) => {
       {bent.author._id === props.user.profile &&
         <>
           <Link to={`/bents/${id}/edit`} state={bent}>Edit</Link>
-          <button>Delete</button>
+          <button onClick={() => props.handleDeleteBlog(id)}>Delete</button>
         </>
       }
      </span>

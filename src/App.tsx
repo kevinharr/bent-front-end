@@ -7,6 +7,7 @@ import * as bentService from './services/bentService'
 import NewBent from './pages/NewBent/NewBent'
 import { BentData } from './types/forms'
 import EditBent from './pages/EditBent/EditBent'
+import BentCard from './components/BentCard/BentCard'
 
 
 // page components
@@ -81,11 +82,11 @@ function App(): JSX.Element {
     navigate('/bents')
   }
 
-  <Route path="/bents/:id/edit" element={
-    <ProtectedRoute user={user}>
-      <EditBent handleUpdateBent={handleUpdateBent} />
-    </ProtectedRoute>
-  } />
+  const handleDeleteBent = async (id) => {
+    const deletedBent = await bentService.deleteBent(id)
+    setBents(bents.filter(b => b._id !== deletedBent._id))
+    navigate('/bents')
+  }
 
   return (
     <>
@@ -118,7 +119,6 @@ function App(): JSX.Element {
             </ProtectedRoute>
           }
         />
-
         <Route
           path="/change-password"
           element={
@@ -132,6 +132,16 @@ function App(): JSX.Element {
             <NewBent handleAddBent={handleAddBent} />
           </ProtectedRoute>
         } />
+        <Route path="/bents/:id/edit" element={
+          <ProtectedRoute user={user}>
+            <EditBent handleUpdateBent={handleUpdateBent} />
+          </ProtectedRoute>
+  } />
+        <Route path="/bents/:id" element={
+          <ProtectedRoute user={user}>
+            <BentCard user={user} handleDeleteBent={handleDeleteBent} />
+          </ProtectedRoute>
+} />
       </Routes>
     </>
   )

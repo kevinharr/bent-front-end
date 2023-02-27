@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import BentList from './pages/BentList/BentList'
 import * as bentService from './services/bentService'
+import NewBent from './pages/NewBent/NewBent'
 
 
 // page components
@@ -66,6 +67,12 @@ function App(): JSX.Element {
     setUser(authService.getUser())
   }
 
+  const handleAddBent = async (bentData) => {
+    const newBent = await bentService.create(bentData)
+    setBents([newBent, ...bents])
+    navigate('/bents')
+  }
+
   return (
     <>
       <NavBar user={user} handleLogout={handleLogout} />
@@ -106,6 +113,11 @@ function App(): JSX.Element {
             </ProtectedRoute>
           }
         />
+        <Route path="/bents/new" element={
+          <ProtectedRoute user={user}>
+            <NewBent handleAddBent={handleAddBent} />
+          </ProtectedRoute>
+        } />
       </Routes>
     </>
   )

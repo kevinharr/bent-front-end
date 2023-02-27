@@ -20,6 +20,7 @@ const NavBar = (props: NavBarProps): JSX.Element => {
           <li><NavLink to="/profiles">Profiles</NavLink></li>
           <li><NavLink to="/change-password">Change Password</NavLink></li>
           <li><NavLink to="/bents">BENTS</NavLink></li>
+          <li><NavLink to="/bents/new">NEW BENT</NavLink></li>
           <li><NavLink to="" onClick={handleLogout}>LOG OUT</NavLink></li>
         </ul>
       :

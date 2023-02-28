@@ -117,7 +117,7 @@ function App(): JSX.Element {
           path="/bents"
           element={
             <ProtectedRoute user={user}>
-              <BentList bents={bents}/>
+              <BentList bents={bents} handleDeleteBent={handleDeleteBent} />
             </ProtectedRoute>
           }
         />

@@ -34,7 +34,7 @@ console.log(form)
         <label htmlFor="work-input">What time of day do you work best?</label>
         <select
           required
-          name="work"
+          name="workPreference"
           id="work-input"
           value={form.workPreference}
           onChange={handleChange}
@@ -45,7 +45,7 @@ console.log(form)
         <label htmlFor="color-input">What is your favorite color?</label>
         <select
           required
-          name="color"
+          name="favoriteColor"
           id="color-input"
           value={form.favoriteColor}
           onChange={handleChange}
@@ -60,7 +60,7 @@ console.log(form)
         <label htmlFor="music-input">What is your favorite genre of music?</label>
         <select
           required
-          name="music"
+          name="favoriteMusic"
           id="music-input"
           value={form.favoriteMusic}
           onChange={handleChange}

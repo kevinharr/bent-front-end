@@ -2,19 +2,17 @@
 import styles from './Landing.module.css'
 
 // types
-// import { User } from '../../types/models'
+import { User } from '../../types/models'
 
-// interface LandingProps {
-//   user: User | null;
-// }
+interface LandingProps {
+  user: User | null;
+}
 
 const Landing = (props: LandingProps): JSX.Element => {
   const { user } = props
 
   return (
     <>
-    
-   
     <main className={styles.heroDiv}>
       <br></br>
       <br></br>

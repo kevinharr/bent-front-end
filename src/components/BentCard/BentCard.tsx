@@ -1,8 +1,6 @@
-import styles from './BentCard.module.css'
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { Bent } from '../../types/models'
-import { useParams } from 'react-router-dom'
-
+import styles from './BentCard.module.css'
 
 interface BentCardProps {
   bent: Bent;
@@ -10,20 +8,19 @@ interface BentCardProps {
 }
 
 const BentCard = (props: BentCardProps): JSX.Element => {
-  const { bent } = props
-  const {id } = useParams()
+  const { bent } = props;
+  const {id } = useParams<{ id: string }>();
 
   return (
-    <>
-      <article className={styles.container}>
-        <header>
-          <span>
-            <h1>Bent Card Test</h1>
-            <h1>{bent.workPreference}</h1>
-            <h1>{bent.favoriteColor}</h1>
-            <h1>{bent.favoriteMusic}</h1>
-          </span>
-        </header>
+    <article className={styles.container}>
+      <header>
+        <span>
+          <h1>Bent Card Test</h1>
+          <h1>{bent.workPreference}</h1>
+          <h1>{bent.favoriteColor}</h1>
+          <h1>{bent.favoriteMusic}</h1>
+        </span>
+      </header>
         <>
           <Link to={`/bents/${id}/edit`} state={bent}>
             <button className={styles.editButton}>Edit</button>
@@ -34,9 +31,7 @@ const BentCard = (props: BentCardProps): JSX.Element => {
             >Delete
           </button>
         </>
-      </article>
-    </>
-   
+    </article>
   )
 }
 

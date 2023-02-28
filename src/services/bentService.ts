@@ -5,7 +5,7 @@ import * as tokenService from './tokenService'
 import { BentFormData } from '../types/forms'
 import { Bent } from '../types/models'
 
-const BASE_URL = `${import.meta.env.VITE_APP_BACK_END_SERVER_URL}/api/bents`
+const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/api/bents`
 
 const getAllBents = async (): Promise<Bent[]> => {
   try {

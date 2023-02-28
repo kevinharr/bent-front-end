@@ -27,7 +27,7 @@ import './App.css'
 
 // types
 import { User, Profile, Bent } from './types/models'
-import { EditBentFormData, NewBentFormData} from './types/forms'
+import { BentFormData } from './types/forms'
 
 function App(): JSX.Element {
   const navigate = useNavigate()
@@ -71,14 +71,14 @@ function App(): JSX.Element {
     if (user) fetchAllBents()
   }, [user])
 
-  const handleCreateBent = async (formData: NewBentFormData): 
+  const handleCreateBent = async (formData: BentFormData): 
   Promise<void> => {
     const newBent = await bentService.create(formData)
       setBents([newBent, ...bents])
       navigate('/bents')
   }
 
-  const handleUpdateBent = async (bentData: EditBentFormData): Promise<void> => {
+  const handleUpdateBent = async (bentData: BentFormData): Promise<void> => {
     const updatedBent = await bentService.update(bentData)
     setBents(bents.map((b) => bentData.id === b.id ? updatedBent : b))
     navigate('')

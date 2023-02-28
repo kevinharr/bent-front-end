@@ -1,18 +1,26 @@
-import { useState } from "react"
-import { useLocation } from "react-router-dom"
 import styles from './EditBent.module.css'
 
-const EditBent = (props) => {
-  const { state } = useLocation()
-  const [form, setForm] = useState(state)
+import { useState } from "react"
+import { useLocation } from "react-router-dom"
 
-  console.log(state)
-  const handleChange = ({ target }) => {
-    setForm({ ...form, [target.name]: target.value })
+
+//types
+import { BentFormData } from '../../types/forms'
+
+interface EditBentProps {
+    handleUpdateBent: (bentData: BentFormData) => void;
+}
+
+const EditBent = (props: EditBentProps): JSX.Element => {
+  const { state } = useLocation()
+  const [form, setForm] = useState<BentFormData>(state)
+
+  const handleChange = (evt: React.FormEvent<HTMLInputElement | HTMLSelectElement>) => {
+    setForm({...form, [evt.currentTarget.name]: evt.currentTarget.value})
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
+  const handleSubmit = (evt: React.FormEvent) => {
+    evt.preventDefault()
     props.handleUpdateBent(form)
   }
 

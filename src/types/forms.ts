@@ -1,14 +1,6 @@
 /* ---------==== custom forms ====--------- */
 
-export interface EditBentFormData {
-  id: number;
-  profile: { id: number };
-  workPreference: string;
-  favoriteColor: string;
-  favoriteMusic: string;
-}
-
-export interface NewBentFormData {
+export interface BentFormData {
   id: number | undefined;
   profileId: number | undefined;
   workPreference: string;

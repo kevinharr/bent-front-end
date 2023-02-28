@@ -1,6 +1,14 @@
 /* ---------===== custom props ====--------- */
 
-
+export interface Bent {
+  id: number;
+  profileId: number;
+  workPreference: string;
+  favoriteColor: string;
+  favoriteMusic: string;
+  createdAt: string;
+  updatedAt: string;
+}
 
 /* ---------===== auth models =====--------- */
 
@@ -21,10 +29,4 @@ export interface User {
   updatedAt: string;
 }
 
-export interface Bent {
-  _id: number;
-  profile: { id: number };
-  workPreference: string;
-  favoriteColor: string;
-  favoriteMusic: string;
-}
+

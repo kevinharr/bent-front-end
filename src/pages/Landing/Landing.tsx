@@ -12,7 +12,10 @@ const Landing = (props: LandingProps): JSX.Element => {
   const { user } = props
 
   return (
-    <body className={styles.heroDiv}>
+    <>
+    
+   
+    <main className={styles.heroDiv}>
       <br></br>
       <br></br>
       <br></br>
@@ -65,7 +68,8 @@ const Landing = (props: LandingProps): JSX.Element => {
       <br></br>
       <br></br>
       <br></br>
-    </body>
+    </main>
+    </>
   )
 }
 

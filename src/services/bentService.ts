@@ -1,9 +1,9 @@
 import * as tokenService from './tokenService'
-import { BentData } from '../types/forms'
+import { EditBentFormData, NewBentFormData } from '../types/forms'
 
 const BASE_URL = `${import.meta.env.VITE_APP_BACK_END_SERVER_URL}/api/bents`
 
-const index = async () => {
+const getAllBents = async () => {
   try {
     const res = await fetch(BASE_URL, {
       headers: { 'Authorization': `Bearer ${tokenService.getToken()}` },
@@ -14,7 +14,7 @@ const index = async () => {
   }
 }
 
-const create = async (bentData:any): Promise<any> => {
+const create = async (formData: NewBentFormData): Promise<any> => {
   try {
     const res = await fetch(BASE_URL, {
       method: 'POST',
@@ -22,7 +22,7 @@ const create = async (bentData:any): Promise<any> => {
         'Authorization': `Bearer ${tokenService.getToken()}`,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(bentData)
+      body: JSON.stringify(formData)
     })
     return res.json()
   } catch (error) {
@@ -30,9 +30,9 @@ const create = async (bentData:any): Promise<any> => {
   }
 }
 
-const update = async (bentData: BentData): Promise<any> => {
+const update = async (bentData: EditBentFormData): Promise<any> => {
   try {
-    const res = await fetch(`${BASE_URL}/${bentData._id}`, {
+    const res = await fetch(`${BASE_URL}/${bentData.id}`, {
       method: 'PUT',
       headers: {
         'Authorization': `Bearer ${tokenService.getToken()}`,
@@ -61,7 +61,7 @@ const deleteBent = async (id) => {
 }
 
 export {
-  index,
+  getAllBents,
   create,
   update,
   deleteBent

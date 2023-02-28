@@ -1,14 +1,6 @@
 // npm modules 
-import * as profileService from './services/profileService'
 import { useState, useEffect } from 'react'
 import { Routes, Route, useNavigate } from 'react-router-dom'
-import BentList from './pages/BentList/BentList'
-import * as bentService from './services/bentService'
-import NewBent from './pages/NewBent/NewBent'
-import { BentData } from './types/forms'
-import EditBent from './pages/EditBent/EditBent'
-import BentCard from './components/BentCard/BentCard'
-
 
 // page components
 import Signup from './pages/Signup/Signup'
@@ -16,49 +8,33 @@ import Login from './pages/Login/Login'
 import Landing from './pages/Landing/Landing'
 import Profiles from './pages/Profiles/Profiles'
 import ChangePassword from './pages/ChangePassword/ChangePassword'
+import BentList from './pages/BentList/BentList'
+import NewBent from './pages/NewBent/NewBent'
+import EditBent from './pages/EditBent/EditBent'
 
 // components
 import NavBar from './components/NavBar/NavBar'
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
+import BentCard from './components/BentCard/BentCard'
 
 // services
 import * as authService from './services/authService'
+import * as profileService from './services/profileService'
+import * as bentService from './services/bentService'
 
 // stylesheets
 import './App.css'
 
 // types
 import { User, Profile, Bent } from './types/models'
+import { EditBentFormData, NewBentFormData} from './types/forms'
 
 function App(): JSX.Element {
   const navigate = useNavigate()
   
   const [user, setUser] = useState<User | null>(authService.getUser())
   const [profiles, setProfiles] = useState<Profile[]>([])
-  const [bents, setBents] = useState([])
-
-  useEffect((): void => {
-    const fetchProfiles = async (): Promise<void> => {
-      try {
-        const profileData: Profile[] = await profileService.getAllProfiles()
-        setProfiles(profileData)
-        console.log("profile data", profileData)
-      } catch (error) {
-        console.log(error)
-      }
-    }
-    if (user) fetchProfiles()
-  }, [user])
-
-  useEffect(() => {
-    const fetchAllBents = async () => {
-      const data = await bentService.index()
-      console.log('Bent Data:', data)
-      console.log("hello bent data")
-      setBents(data)
-    }
-    if (user) fetchAllBents()
-  }, [user])
+  const [bents, setBents] = useState<Bent[]>([])
 
   const handleLogout = (): void => {
     authService.logout()
@@ -70,21 +46,47 @@ function App(): JSX.Element {
     setUser(authService.getUser())
   }
 
-  const handleAddBent = async (bentData: BentData) => {
-    const newBent = await bentService.create(bentData)
-    setBents([newBent, ...bents])
-    navigate('/bents')
+  // useEffect((): void => {
+  //   const fetchProfiles = async (): Promise<void> => {
+  //     try {
+  //       const profileData: Profile[] = await profileService.getAllProfiles()
+  //       setProfiles(profileData)
+  //       console.log("profile data", profileData)
+  //     } catch (error) {
+  //       console.log(error)
+  //     }
+  //   }
+  //   if (user) fetchProfiles()
+  // }, [user])
+
+  useEffect((): void => {
+    const fetchAllBents = async (): Promise<void> => {
+      try {
+        const bentData: Bent[] = await bentService.getAllBents()
+        setBents(bentData)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    if (user) fetchAllBents()
+  }, [user])
+
+  const handleCreateBent = async (formData: NewBentFormData): 
+  Promise<void> => {
+    const newBent = await bentService.create(formData)
+      setBents([newBent, ...bents])
+      navigate('/bents')
   }
 
-  const handleUpdateBent = async (bentData: BentData): Promise<void> => {
+  const handleUpdateBent = async (bentData: EditBentFormData): Promise<void> => {
     const updatedBent = await bentService.update(bentData)
-    setBents(bents.map((b) => bentData._id === b._id ? updatedBent : b))
-    navigate('/bents')
+    setBents(bents.map((b) => bentData.id === b.id ? updatedBent : b))
+    navigate('')
   }
 
-  const handleDeleteBent = async (id) => {
+  const handleDeleteBent = async (id: number) => {
     const deletedBent = await bentService.deleteBent(id)
-    setBents(bents.filter(b => b._id !== deletedBent._id))
+    setBents(bents.filter(b => b.id !== deletedBent.id))
     navigate('/bents')
   }
 
@@ -127,19 +129,23 @@ function App(): JSX.Element {
             </ProtectedRoute>
           }
         />
-        <Route path="/bents/new" element={
+        <Route path="/bents/new" 
+        element={
           <ProtectedRoute user={user}>
-            <NewBent handleAddBent={handleAddBent} />
+            <NewBent handleCreateBent={handleCreateBent} />
           </ProtectedRoute>
         } />
-        <Route path="/bents/:id/edit" element={
+        <Route path="/bents/:id/edit" 
+        element={
           <ProtectedRoute user={user}>
             <EditBent handleUpdateBent={handleUpdateBent} />
           </ProtectedRoute>
   } />
-        <Route path="/bents/:id" element={
+        <Route path="/bents/:id" 
+        element={
           <ProtectedRoute user={user}>
-            <BentCard user={user} handleDeleteBent={handleDeleteBent} />
+            <BentCard user={user} 
+            handleDeleteBent={handleDeleteBent} />
           </ProtectedRoute>
 } />
       </Routes>

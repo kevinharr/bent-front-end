@@ -1,25 +1,36 @@
 import { useState } from "react"
 import styles from './NewBent.module.css'
+import { NewBentFormData } from "../../types/forms"
 
-const NewBent = (props) => {
-  const [form, setForm] = useState({
+interface NewBentProps {
+    handleCreateBent: (formData: NewBentFormData) => void;
+}
+
+const NewBent = (props: NewBentProps): JSX.Element => {
+  const [form, setForm] = useState<NewBentFormData>({
+    id: undefined,
+    profileId: undefined,
     workPreference: 'Night Owl',
     favoriteColor: 'Blue',
     favoriteMusic: 'Alternative',
   })
 
-  const handleChange = ({ target }) => {
-    setForm({ ...form, [target.name]: target.value })
+  const handleChange = (evt: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>): void => {
+    console.log(evt.target.name)
+    console.log(evt.target.value)
+    
+    setForm({ ...form, [evt.target.name]: evt.target.value})
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    props.handleAddBent(form)
-  }
-
+  const handleSubmit = (evt: React.FormEvent) => {
+    evt.preventDefault()
+    props.handleCreateBent(form)
+  } 
+console.log(form)
   return (
     <main className={styles.container}>
-      <form onSubmit={handleSubmit}>
+        <h1>Put in your preferences for the meeting today:</h1>
+        <form onSubmit={handleSubmit}>
         <label htmlFor="work-input">What time of day do you work best?</label>
         <select
           required

@@ -6,7 +6,7 @@ const BentList = (props) => {
   return (
     <main className={styles.container}>
       {props.bents.map((bent: Bent) => (
-        <BentCard key={bent._id} bent={bent} />
+        <BentCard key={bent.id} bent={bent} />
       ))}
       Bent List
     </main>

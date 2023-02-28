@@ -1,6 +1,20 @@
 /* ---------==== custom forms ====--------- */
 
+export interface EditBentFormData {
+  id: number;
+  profile: { id: number };
+  workPreference: string;
+  favoriteColor: string;
+  favoriteMusic: string;
+}
 
+export interface NewBentFormData {
+  id: number | undefined;
+  profileId: number | undefined;
+  workPreference: string;
+  favoriteColor: string;
+  favoriteMusic: string;
+}
 
 /* ---------===== auth forms =====--------- */
 
@@ -26,10 +40,4 @@ export interface PhotoFormData {
   photo: File | null;
 }
 
-export interface BentData {
-  _id: number;
-  profile: { id: number };
-  workPreference: string;
-  favoriteColor: string;
-  favoriteMusic: string;
-}
+

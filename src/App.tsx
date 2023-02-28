@@ -46,18 +46,18 @@ function App(): JSX.Element {
     setUser(authService.getUser())
   }
 
-  // useEffect((): void => {
-  //   const fetchProfiles = async (): Promise<void> => {
-  //     try {
-  //       const profileData: Profile[] = await profileService.getAllProfiles()
-  //       setProfiles(profileData)
-  //       console.log("profile data", profileData)
-  //     } catch (error) {
-  //       console.log(error)
-  //     }
-  //   }
-  //   if (user) fetchProfiles()
-  // }, [user])
+  useEffect((): void => {
+    const fetchProfiles = async (): Promise<void> => {
+      try {
+        const profileData: Profile[] = await profileService.getAllProfiles()
+        setProfiles(profileData)
+        console.log("profile data", profileData)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    if (user) fetchProfiles()
+  }, [user])
 
   useEffect((): void => {
     const fetchAllBents = async (): Promise<void> => {
@@ -85,7 +85,7 @@ function App(): JSX.Element {
   }
 
   const handleDeleteBent = async (id: number) => {
-    const deletedBent = await bentService.deleteBent(id)
+    const deletedBent = await bentService.delete(id)
     setBents(bents.filter(b => b.id !== deletedBent.id))
     navigate('/bents')
   }
@@ -108,7 +108,7 @@ function App(): JSX.Element {
           element={
             <ProtectedRoute user={user}>
               <Profiles
-                profiles={profiles}
+                profiles={Profiles}
                />
             </ProtectedRoute>
           }
@@ -141,11 +141,13 @@ function App(): JSX.Element {
             <EditBent handleUpdateBent={handleUpdateBent} />
           </ProtectedRoute>
   } />
-        <Route path="/bents/:id" 
-        element={
-          <ProtectedRoute user={user}>
-            <BentCard user={user} 
-            handleDeleteBent={handleDeleteBent} />
+        <Route 
+          path="/bents/:id" 
+          element={
+           <ProtectedRoute user={user}>
+            <BentCard 
+              user={user} 
+              handleDeleteBent={handleDeleteBent} />
           </ProtectedRoute>
 } />
       </Routes>

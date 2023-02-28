@@ -1,13 +1,13 @@
 import { useState } from "react"
 import styles from './NewBent.module.css'
-import { NewBentFormData } from "../../types/forms"
+import { BentFormData } from "../../types/forms"
 
 interface NewBentProps {
-    handleCreateBent: (formData: NewBentFormData) => void;
+    handleCreateBent: (formData: BentFormData) => void;
 }
 
 const NewBent = (props: NewBentProps): JSX.Element => {
-  const [form, setForm] = useState<NewBentFormData>({
+  const [form, setForm] = useState<BentFormData>({
     id: undefined,
     profileId: undefined,
     workPreference: 'Night Owl',

@@ -1,20 +1,24 @@
+//services
 import * as tokenService from './tokenService'
-import { EditBentFormData, NewBentFormData } from '../types/forms'
+
+//types
+import { BentFormData } from '../types/forms'
+import { Bent } from '../types/models'
 
 const BASE_URL = `${import.meta.env.VITE_APP_BACK_END_SERVER_URL}/api/bents`
 
-const getAllBents = async () => {
+const getAllBents = async (): Promise<Bent[]> => {
   try {
     const res = await fetch(BASE_URL, {
       headers: { 'Authorization': `Bearer ${tokenService.getToken()}` },
     })
-    return res.json()
+    return await res.json() as Bent[]
   } catch (error) {
-    console.log(error)
+    throw error
   }
 }
 
-const create = async (formData: NewBentFormData): Promise<any> => {
+const create = async (formData: BentFormData): Promise<Bent> => {
   try {
     const res = await fetch(BASE_URL, {
       method: 'POST',
@@ -24,13 +28,13 @@ const create = async (formData: NewBentFormData): Promise<any> => {
       },
       body: JSON.stringify(formData)
     })
-    return res.json()
+    return await res.json() as Bent
   } catch (error) {
-    console.log(error)
+  throw error
   }
 }
 
-const update = async (bentData: EditBentFormData): Promise<any> => {
+const update = async (bentData: BentFormData): Promise<Bent> => {
   try {
     const res = await fetch(`${BASE_URL}/${bentData.id}`, {
       method: 'PUT',
@@ -40,23 +44,21 @@ const update = async (bentData: EditBentFormData): Promise<any> => {
       },
       body: JSON.stringify(bentData)
     })
-    return res.json()
+    return await res.json() as Bent
   } catch (error) {
-    console.log(error)
+   throw error
   }
 }
 
-const deleteBent = async (id) => {
+const deleteBent = async (id: number): Promise<Bent> => {
   try {
     const res = await fetch(`${BASE_URL}/${id}`, {
       method: 'DELETE',
-      headers: {
-        'Authorization': `Bearer ${tokenService.getToken()}`
-      }
+      headers: { 'Authorization': `Bearer ${tokenService.getToken()}`}
     })
-    return res.json()
+    return await res.json() as Bent
   } catch (error) {
-    console.log(error)
+   throw (error)
   }
 }
 
@@ -64,6 +66,6 @@ export {
   getAllBents,
   create,
   update,
-  deleteBent
+  deleteBent as delete,
 }
 

@@ -14,7 +14,7 @@ interface BentListProps {
 const BentList = (props: BentListProps): JSX.Element => {
   return (
     <main className={styles.main}>
-      <h1>Here is a list of bents.</h1>
+      <h1>Here is a list of bents for the meeting.</h1>
       {props.bents.length ?
         <div className={styles.container}>
           {props.bents.map(bent => (

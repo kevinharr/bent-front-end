@@ -108,7 +108,7 @@ function App(): JSX.Element {
           element={
             <ProtectedRoute user={user}>
               <Profiles
-                profiles={Profiles}
+                profiles={profiles}
                />
             </ProtectedRoute>
           }
@@ -129,26 +129,32 @@ function App(): JSX.Element {
             </ProtectedRoute>
           }
         />
-        <Route path="/bents/new" 
-        element={
+        <Route 
+          path="/bents/new" 
+          element={
           <ProtectedRoute user={user}>
             <NewBent handleCreateBent={handleCreateBent} />
           </ProtectedRoute>
-        } />
-        <Route path="/bents/:id/edit" 
-        element={
+           } 
+        />
+        <Route 
+          path="/bents/:id/edit" 
+          element={
           <ProtectedRoute user={user}>
             <EditBent handleUpdateBent={handleUpdateBent} />
           </ProtectedRoute>
-  } />
+          } 
+        />
         <Route 
           path="/bents/:id" 
           element={
            <ProtectedRoute user={user}>
-            <BentCard bent ={bents}
+            <BentCard 
+              bent ={bents[0]}
               handleDeleteBent={handleDeleteBent} />
           </ProtectedRoute>
-} />
+          } 
+        />
       </Routes>
     </>
   )

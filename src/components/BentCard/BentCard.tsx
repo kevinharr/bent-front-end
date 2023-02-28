@@ -18,6 +18,7 @@ const BentCard = (props: BentCardProps): JSX.Element => {
       <article className={styles.container}>
         <header>
           <span>
+            <h1>Bent Card Test</h1>
             <h1>{bent.workPreference}</h1>
             <h1>{bent.favoriteColor}</h1>
             <h1>{bent.favoriteMusic}</h1>
